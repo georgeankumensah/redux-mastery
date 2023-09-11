@@ -1,18 +1,27 @@
-import React from "react";
+import React,{useEffect} from "react";
 import logo from "./assets/images/logo.jpg";
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
+import useStyles from "./Styles";
+import { useDispatch } from "react-redux";
+import {getPosts} from "./actions/posts";
+
 
 import Posts from "./components/Post/Posts";
 import Form from "./components/Form/Form";
 
 function App() {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  useEffect(()=>{
+    dispatch(getPosts());
+  },[dispatch]);
   return (
     <Container maxwidth="lg">
-      <AppBar position="static" color="inherit">
-        <Typography variant="h2" align="center">
+      <AppBar position="static" color="inherit" className={classes.appBar}>
+        <img src={logo} alt="instaverse" height="60" className={classes.image} />
+        <Typography variant="h2" align="center" className={classes.heading}>
           Instaverse
         </Typography>
-        <img src={logo} alt="instaverse" height="60" />
       </AppBar>
       <Grow in>
         <Container>
